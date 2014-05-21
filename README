@@ -1,14 +1,48 @@
-This is a test project for a mechanical z-axis for the Shapoko 2 to move the motor out of the way and provide better clearance for large spindles such as the dewalt 611.
+This is a test project for a mechanical z-axis for the Shapoko 2 to move the motor out of the way and provide better clearance for large spindles such as the Dewalt 611.
 
 The power of OpenScad is shown in the easy to understand source files.
 
-It uses herringbone gears to reduce/eleminate backlash caused by traditional gear meshing tolerances 
+It uses herringbone gears to reduce/eliminate backlash caused by traditional gear meshing tolerances 
 
-The idler gear is intended to have 2 sandwitched 608 bearings and an 8mm hub.  5/16 works in a pinch.   
+The idler gear is intended to have 2 sandwiched 608 bearings and an 8mm hub.  5/16 works in a pinch.   
 
-The leadscrew gear is intended to be used with the stock shapeoko flanged bearing that came in the kit.  Optionaly a second bearing (standard 608) can sandwitch the gear and held down with to top_br_zplate to add stability.
+The lead screw gear is intended to be used with the stock Shapeoko flanged bearing that came in the kit.  Optionally a second bearing (standard 608) can sandwich the gear and held down with to top_br_zplate to add stability.
 
-The gears are designed to be printed on a well tuned 3d printer. 
+The gears are designed to be printed on a well-tuned 3d printer. 
 The plates are designed to be machined out of aluminum using the Shapeoko 2.
 They will be printed for a fitting prototype to ensure all dimensions and tolerances.
-The zplate will be machined first.
+The zplate will be machined first. 
+The other plates may remain plastic since they don't need to be that strong.
+
+Parts List.
+Basic plate hardware:
+1 ZPLATE (make using dxf export from makerslide_plate.scad)
+1 BR_ZPLATE ( make using dxf or stl export from makerslide_plate.scad )
+2 M3 x 15mm  (retention plate fasteners)
+2 M3 Nyloc Nuts
+4 M3 washers
+1 608 flanged bearing (from Shapeoko 2 kit)
+1 M8 lead screw (from kit or longer to give additional down travel if needed)
+2 M8 washers (get extras to use as optional spacers on lead screw)
+3 M8 Nuts (1 below bearing 1 on top and one inserted into lead screw gear.
+
+
+Stepper Motor hardware:
+1 - Nema 17 stepper motor ( from kit)
+2 M3 x 10mm (Nema17 z-motor mount)
+2 M3 washers (optional)
+1 gear (Nema17_motor_gear from gearbox.scad)
+1 M3 hex nut (inserted into slot on gear)
+1 M3 grub screw (secured through the gear and nut into the motor shaft flat
+
+Gearbox
+1 IDLER_GEAR (stl from gearbox.scad)
+2 608ZZ sealed Skateboard bearings
+1 M8 x 30mm bolt (37mm threaded rod and another nut could work instead)
+1 M8 nut
+1 M8 Nyloc nut
+1 M8 Washer (spacer - can use extras for addition spacing as needed)
+
+
+
+

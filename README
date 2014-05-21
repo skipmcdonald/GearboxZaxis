@@ -1,0 +1,14 @@
+This is a test project for a mechanical z-axis for the Shapoko 2 to move the motor out of the way and provide better clearance for large spindles such as the dewalt 611.
+
+The power of OpenScad is shown in the easy to understand source files.
+
+It uses herringbone gears to reduce/eleminate backlash caused by traditional gear meshing tolerances 
+
+The idler gear is intended to have 2 sandwitched 608 bearings and an 8mm hub.  5/16 works in a pinch.   
+
+The leadscrew gear is intended to be used with the stock shapeoko flanged bearing that came in the kit.  Optionaly a second bearing (standard 608) can sandwitch the gear and held down with to top_br_zplate to add stability.
+
+The gears are designed to be printed on a well tuned 3d printer. 
+The plates are designed to be machined out of aluminum using the Shapeoko 2.
+They will be printed for a fitting prototype to ensure all dimensions and tolerances.
+The zplate will be machined first.

@@ -23,26 +23,27 @@ ox = 57.15;
 oy = 50.80;
 oz = 6.35;
 screw = 5;
-rad = 5;
+rad = 10; //corner radius size
 
 module makerslide(h=100) {
-	linear_extrude(file="makerslide_extrusion_profile.dxf", layer="makerslide",height=100, center=true, convexity=10);
-	}
+	linear_extrude(file="makerslide_extrusion_profile.dxf", layer="makerslide",height=h, center=true, convexity=10);
+}
 
-% translate([0,0,50+cz/2])makerslide(20);
+% translate([0,0,50+cz/2])makerslide();
 $fn=20;
 //Clearance for screw head and washer
 % translate([10,10,0])cylinder(h=12, r=5/2, center = true);
 % translate([10,-10,0])cylinder(h=12, r=5/2, center = true);
 
-module zplate(){   // alumium underplate for strength
-// center
-% cylinder(h=30, r=.5);
+module zplate(){   // alumium underplate for strength -- pla for fitting prototype only
+// center marker
+% cylinder(h=30, r=.5); // just a guide mark doesn't effect part
+
+// Plate Base
 	difference(){
 	cube([cx,cy,cz], center = true);
 // Makerslide holes
-//%	translate([10,10,0])cylinder(h=20, r=screw5/2, center = true);
-//%	translate([10,-10,0])cylinder(h=20, r=screw5/2, center = true);
+
 	translate([6,10,0])cylinder(h=20, r=screw5/2, center = true);
 	translate([6,-10,0])cylinder(h=20, r=screw5/2, center = true);
 	translate([14,10,0])cylinder(h=20, r=screw5/2, center = true);
@@ -86,15 +87,92 @@ module zplate(){   // alumium underplate for strength
 		translate([cx/2-rad,(-cy)/2+rad,0]) cylinder(h=20, r=rad, center = true);
 		}
 
-//	translate([31.05,0,bearing_h/2])cylinder(h=bearing_h,r=bearing_d/2, center = true, $fn=50);
-//translate([31.05,0,0])cylinder(h=bearing_h,r=bearing_d/2-2.5, center = true, $fn=50);
+// Bearing hole
   translate([31.05,0,0])cylinder(h=15,r=bearing_d/2, center = true,$fn=100);
 
-
+// Bearing retention holes
+	translate([31.05,-15.5,0])cylinder(h=15,r=screw3/2, center = true);
+	translate([31.05,15.5,0])cylinder(h=15,r=screw3/2, center = true);
 
 	}
 
 }
+bx = 25;
+module br_zplate(){   // bearing retention plate
+// center marker
+% cylinder(h=30, r=.5); // just a guide mark doesn't effect part
+
+// Plate Base
+	difference(){
+		cube([bx,cy,cz], center = true);
+// radius corners
+	difference(){
+		translate([(bx-rad)/2,(cy-rad)/2,0]) cube([rad,rad,20],center = true);		
+		translate([bx/2-rad,(cy)/2-rad,0]) cylinder(h=20, r=rad, center = true);
+		}
+	difference(){
+		translate([(-bx+rad)/2,(cy-rad)/2,0]) cube([rad,rad,20],center = true);		
+		translate([-bx/2+rad,(cy)/2-rad,0]) cylinder(h=20, r=rad, center = true);
+		}
+	difference(){
+		translate([(-bx+rad)/2,(-cy+rad)/2,0]) cube([rad,rad,20],center = true);	
+		translate([-bx/2+rad,(-cy)/2+rad,0]) cylinder(h=20, r=rad, center = true);
+		}
+	difference(){
+		translate([(bx-rad)/2,(-cy+rad)/2,0]) cube([rad,rad,20],center = true);		
+		translate([bx/2-rad,(-cy)/2+rad,0]) cylinder(h=20, r=rad, center = true);
+		}
+// zplate mating holes
+	translate([0,-15.5,0])cylinder(h=15,r=screw3/2, center = true);
+	translate([0,15.5,0])cylinder(h=15,r=screw3/2, center = true);
+
+// bearing access hole
+	cylinder(h=15,r=(bearing_d-5)/2, center = true);
+	}
+}
+
+bz = 7;
+module br_top_zplate(){   // optional top bearing -- retention plate
+// center marker -- reminds me where center is if I rotate the part
+% cylinder(h=30, r=.5); // just a guide mark doesn't effect part
+
+// Plate Base
+	difference(){
+		cube([bx,cy,bz], center = true);
+// radius corners
+	difference(){
+		translate([(bx-rad)/2,(cy-rad)/2,0]) cube([rad,rad,20],center = true);		
+		translate([bx/2-rad,(cy)/2-rad,0]) cylinder(h=20, r=rad, center = true);
+		}
+	difference(){
+		translate([(-bx+rad)/2,(cy-rad)/2,0]) cube([rad,rad,20],center = true);		
+		translate([-bx/2+rad,(cy)/2-rad,0]) cylinder(h=20, r=rad, center = true);
+		}
+	difference(){
+		translate([(-bx+rad)/2,(-cy+rad)/2,0]) cube([rad,rad,20],center = true);	
+		translate([-bx/2+rad,(-cy)/2+rad,0]) cylinder(h=20, r=rad, center = true);
+		}
+	difference(){
+		translate([(bx-rad)/2,(-cy+rad)/2,0]) cube([rad,rad,20],center = true);		
+		translate([bx/2-rad,(-cy)/2+rad,0]) cylinder(h=20, r=rad, center = true);
+		}
+// zplate mating holes
+	translate([0,-15.5,0])cylinder(h=15,r=screw3/2, center = true);
+	translate([0,15.5,0])cylinder(h=15,r=screw3/2, center = true);
+
+// bearing access hole
+	cylinder(h=15,r=(bearing_d-5)/2, center = true);
+
+// bearing seat recess
+	translate ([0,0,bz/2])cylinder(h=7,r=(bearing_d)/2, center = true);
+	}
+// image of 608 bearing for fitting purposes
+%	difference(){
+		translate ([0,0,bz/2])cylinder(h=7,r=(bearing_d)/2, center = true, $fn=200);
+		translate ([0,0,bz/2])cylinder(h=15,r=screw8/2, center = true);
+   }
+}
+
 /*	
 module original_z_plate(){
 
@@ -140,6 +218,18 @@ translate([0,0,0])difference(){
 */
 
 //%rotate([0,180,0])translate([-ox-2,-oy/2,0])original_z_plate();
-zplate();  // for stl export
-% translate([-9,0,-17])gearbox();
+// zplate();  // for stl export
+//%translate ([31,0,-cz])br_zplate();  //  display
+//%translate ([31,0,-38])br_top_zplate(); // display
+//% translate([-9,0,-17])gearbox();  // display purposes only
+
+
 //projection(cut = true) zplate();  // for dxf export
+//projection(cut = true) br_zplate();  // for dxf export
+
+// prototype print the parts.
+translate ([0,0,cz/2])zplate();  // for stl export
+translate ([0,cy+5,cz/2])br_zplate();  // for stl export
+translate ([31,cy+5,bz/2])br_top_zplate(); // for stl export
+
+

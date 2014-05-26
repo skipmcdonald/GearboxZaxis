@@ -16,7 +16,7 @@ screw3 = 3.2;
 screw5 = 5.1;
 screw8 = 8.1;
 leadscrew = 8.5;
-bearing_d = 21.80;
+bearing_d = 22.50;
 bearing_h = 7;
 //original plate dimensions
 ox = 57.15;

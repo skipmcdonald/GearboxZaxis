@@ -73,7 +73,7 @@ tears = 8;
     herringbone_gear( teeth=32, circles=0, shaft=25*2, height=12 );
 	 translate([0,0,12/2-4/2]) difference() {
 				cylinder(r=25.1, h=4,center = true);
-				cylinder(r=22/2, h=4.1,center = true, $fn = 100);
+				cylinder(r=22.5/2, h=4.1,center = true, $fn = 100);
 
 		//teardrop shaped holes 
   				for(i=[0:tears-1])
@@ -83,13 +83,13 @@ tears = 8;
 
 				}
 	difference(){
-	 translate([0,0,0]) cylinder(r=(22+3)/2, h=12,center = true, $fn = 100);
-    translate([0,0,0]) cylinder(r=22/2, h=12.1,center = true,$fn = 100);
+	 translate([0,0,0]) cylinder(r=(22.5+3)/2, h=12,center = true, $fn = 100);
+    translate([0,0,0]) cylinder(r=22.5/2, h=12.1,center = true,$fn = 100);
 	 }
     //608 bearing trap
     difference() {
-      translate( [0, 0, 0] ) cylinder( r=11.5, h=.5, center = true );
-      translate( [0, 0, 0] ) cylinder( r=11, h=10, $fn=10, center = true );
+      translate( [0, 0, 0] ) cylinder( r=12, h=.5, center = true );
+      translate( [0, 0, 0] ) cylinder( r=11.25, h=10, $fn=10, center = true );
     	}
     }
 // shaft position
@@ -112,10 +112,10 @@ difference() {
     //gear
     herringbone_gear( teeth=13, circles=0, shaft=8.2 );
 
-    //M8 hobbed bolt head fit washer
+    //M8 bolt head fit washer
     difference() {
       translate( [0, 0, -13] ) cylinder( r=9.4, h=6 );
-      translate( [0, 0, -13.5] ) cylinder( r=6.6, h=7, $fn=6 );
+      translate( [0, 0, -13.5] ) cylinder( r=7.7, h=7, $fn=6 );
     }
   }
 }
@@ -152,9 +152,9 @@ module Nema17_motor_gear(){
         //enterance
         translate( [0, -3, 14.5] ) cube( [5.4, 6, 2.4], center=true );
         //nut
-        translate( [0, 0, 13.3] ) rotate( [0, 0, 30] ) cylinder( r=3.12, h=2.4, $fn=6 );
+        translate( [0, 0, 13.3] ) rotate( [0, 0, 30] ) cylinder( r=3.14, h=2.4, $fn=6 );
         //grub hole
-        translate( [0, 0, 5] ) cylinder( r=1.5, h=15 );
+        translate( [0, 0, 5] ) cylinder( r=1.6, h=15 );
       }
     }
   }
@@ -168,7 +168,7 @@ module Nema17_motor_gear(){
 	collar_d = 22.05;
 	collar_h = 2;
 	shaft_l = 24;
-	shaft_d = 5;
+	shaft_d = 5.3;
 	m3 = 3.1;
 	$fn = 30;
 // show nema17 outline for positioning
@@ -191,6 +191,6 @@ translate( [-40, 0, 0] ) Nema17_motor_gear();
 }
 
 //gearbox();  // for test fit only do not export
-//idler_gear();  // for stl export
-//translate( [0, 45, -1] ) leadscrew_gear(); // for stl export
-//translate( [-45, 0, -8] )Nema17_motor_gear(); // for stl export
+idler_gear();  // for stl export
+translate( [0, 45, -1] ) leadscrew_gear(); // for stl export
+translate( [-45, 0, -8] )Nema17_motor_gear(); // for stl export
